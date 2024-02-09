@@ -3,12 +3,12 @@ import nodemailer from 'nodemailer'
 import cors from 'cors'
 const app =express()
 const port =9000;
-
-app.use("/",(req,resp)=>{
-    resp.json({message:"helllo i an express js"})
+app.use(cors())
+app.get("/",(req,resp)=>{
+    resp.send("hello hi")
 })
 
-app.use(cors())
+
 app.use(express.json())
 app.post('/',(req,resp)=>{
     let body=req.body
