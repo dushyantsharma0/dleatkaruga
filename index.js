@@ -10,7 +10,7 @@ app.get("/",(req,resp)=>{
 
 
 app.use(express.json())
-app.post('/',(req,resp)=>{
+app.post('/',async(req,resp)=>{
     let body=req.body
     let value=body.title
     
@@ -27,7 +27,7 @@ app.post('/',(req,resp)=>{
             pass:"hmmdlqkubovnngdf"
         }
     }
-    const transporter=nodemailer.createTransport(option)
+    const transporter=await nodemailer.createTransport(option)
     
     const mailOption={
         to:value,
@@ -44,7 +44,7 @@ app.post('/',(req,resp)=>{
         }
     })
 
-     resp.send("send messing on"+value)
+     
 })
 
 
