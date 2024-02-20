@@ -1,11 +1,21 @@
 const express =require('express')
 const nodemailer=require('nodemailer')
 const cors=require('cors')
+const otpGenerator = require('otp-generator')
 const app =express()
 const port =9000;
 app.use(cors())
+
+
+
+
 app.get("/",(req,resp)=>{
-    resp.send("hello hi")
+  
+
+ //const otp=otpGenerator.generate(4, { lowerCaseAlphabets:false,upperCaseAlphabets: false, specialChars: false });
+      
+
+ resp.send(`your otp is : `)
 })
 
 
@@ -15,7 +25,8 @@ app.post('/',async(req,resp)=>{
     let value=body.title
     
 
-
+let newotp="5555"
+let firstname="aman"
 
 
     const option ={
@@ -28,12 +39,12 @@ app.post('/',async(req,resp)=>{
         }
     }
     const transporter=await nodemailer.createTransport(option)
-    
+         
     const mailOption={
         to:value,
         from:"meammakerds@gmail.com",
         subject: 'Sick leave',
-        html:"Sick leave refers to a period of authorized absence from work that is granted to employees specifically for the purpose of recovering from an illness or addressing personal medical needs . It is a form of paid leave provided by employers to support the well-being and health of their employees. "
+        html:`<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Document</title></head> <body> <p>dear ${firstname} </p><br><p>Thank You for registering with demo plateform.com the no1 demo site for checking demo</p> <br><br><p>Enter the below mentioned one time password to complete your regitration</p> <h1 style="font-weight: 900;">OTP:${newotp}</h1></body> </html>`
     }
     transporter.sendMail(mailOption,(err,data)=>{
         if(err){
